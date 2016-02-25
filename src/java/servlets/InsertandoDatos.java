@@ -8,13 +8,11 @@ package servlets;
 import ConexionBD.Conexion;
 import ConexionBD.CreaPrefichaPDF;
 import ConexionBD.Procedimientos;
-import ConexionBD.VerificaVigencia;
 import beans.BMail;
 import beans.BaseDatos;
 import beans.ContactoEmeAsp;
 import beans.DomicilioAspirante;
 import beans.EscProcedenciaAsp;
-import beans.FechaRenovar;
 import beans.PersonalesAspirante;
 import beans.SocioeconomicosAsp;
 import com.google.gson.Gson;
@@ -29,7 +27,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import modelos.ClaseEnviarCorreo;
 import modelos.Encripta;
 import modelos.GeneraAuditoria;
 import modelos.Mail;
@@ -217,7 +214,7 @@ public class InsertandoDatos extends HttpServlet {
                         ResPersonalData = p.InsertaPersonales(aspirante.getCurp(), aspirante.getNombre(), aspirante.getAppat(),
                                 aspirante.getApmat(), aspirante.getFechaNac(), aspirante.getPaisNac(), aspirante.getEdoNac(),
                                 aspirante.getMpioNac(), aspirante.getLocNac(), aspirante.getSexo(), aspirante.getEdoCivil(),
-                                aspirante.getTipoSangre(), aspirante.getCapacidadDif(), aspirante.getCurso().charAt(0), aspirante.getCorreo());
+                                aspirante.getTipoSangre(), aspirante.getCapacidadDif(),aspirante.getCorreo());
                         Resultado = ResPersonalData[1];
                         if (Resultado != 0) {
                             termina = false;
@@ -247,14 +244,6 @@ public class InsertandoDatos extends HttpServlet {
                             switch (i) {
                                 case 1:
                                     Resultado = p.InsertaCarrera(aspirante.getIdAspirante(), aspirante.getCarrOp1(), i);
-                                    i++;
-                                    break;
-                                case 2:
-                                    Resultado = p.InsertaCarrera(aspirante.getIdAspirante(), aspirante.getCarrOp2(), i);
-                                    i++;
-                                    break;
-                                case 3:
-                                    Resultado = p.InsertaCarrera(aspirante.getIdAspirante(), aspirante.getCarrOp3(), i);
                                     i++;
                                     break;
                             }
@@ -331,26 +320,10 @@ public class InsertandoDatos extends HttpServlet {
 //                    String url = "http://localhost:33956//MODULO_ASPIRANTE/PrefichaGenerar?curp=" + curp;
                     String url = Constantes.URL_ENCRIPT + curp;
                     BMail beanMail = new BMail();
-                    beanMail.setCuerpo("<b><font size=4 face=\"arialblack\" > Durante el proceso de registro recibirá los  siguientes  correos, por favor permanezca al pendiente: \n"
-                            + "<br><br>"
-                            + " 1.-Correo  de generación de preficha, que se le enviará  al concluir el registro de sus datos. \n"
-                            + "<br>"
-                            + "2.-Correo de liberación de pago, en un periodo máximo de 3 a 4 días hábiles después de haber realizado el pago bancario. \n"
-                            + "<br>"
-                            + "3.-Correo de alta en Ceneval, minutos después del correo anterior. Es importante que reciba estos dos últimos correos. \n "
-                            + "<br>"
-                            + "4.-Correo de generación de ficha, que se enviará al concluir el proceso de registro, esto es después de haber entregado sus \n"
-                            + "papeles en el departamento de servicios escolares edif. X. \n "
-                            + "<br><br>"
-                            + "En caso de no recibir alguno de ellos, comuníquese con nostros desde:  "
-                            + "<br>"
-                            + home + " en el apartado de contacto.</font></b>"
-                            + "<br><br>"
-                            + "<font size=4 face=\"arialblack\">Recibirá una  notificación cuando su  pago haya sido  procesado, permanezca al pendiente de  su correo. "
-                            + "Por favor haga click en el siguiente enlace\n"
-                            + "para que pueda ver su preficha.  "
+                    beanMail.setCuerpo("<b><font size=4 face=\"arialblack\" > Estimado apirante por favor haga click en el siguiente enlace para visualizar su preficha."
                             + "<a href=" + url
                             + ">Genera Preficha</a></font>.");
+                    
                     Mail m = new Mail();
                     boolean ret = m.sendMail(beanMail, "aspirantes@ittoluca.edu.mx", aspirante.getCorreo(), "11280672", true, "Aspirante  Tecnológico de Toluca: Generar Preficha");
                     if (ret) {
@@ -415,7 +388,6 @@ public class InsertandoDatos extends HttpServlet {
                     + aspirante.getEdoCivil() + " "
                     + aspirante.getTipoSangre() + " "
                     + aspirante.getCapacidadDif() + " "
-                    + aspirante.getCurso().charAt(0) + " "
                     + aspirante.getCorreo() + " "
                     //domicilio
                     + "Domicilio: "
@@ -432,8 +404,6 @@ public class InsertandoDatos extends HttpServlet {
                     //carrera
                     + "Carrera:  1.-"
                     + aspirante.getCarrOp1() + " "
-                    + "2.-" + aspirante.getCarrOp2() + " "
-                    + "3.-" + aspirante.getCarrOp3() + " "
                     //Escuela de procedecia
                     + "Escuela de procedencia: "
                     + AspEscuela.getEscuela() + " "
@@ -485,13 +455,13 @@ public class InsertandoDatos extends HttpServlet {
 
             try {
                 CallableStatement cs = null;
-                cs = con.getConnection().prepareCall(" {call FICHAS.PQ_INSERT_ASPIRANTE_3.SET_INSERCION_GENERAL_ASP_SP(?,?,?,?,?,?,?,?,?,?,"
+                cs = con.getConnection().prepareCall(" {call FICHAS.PQ_PROCESO_DISTANCIA_ASP.SET_GENERAR_DISTANCIA_ASP_SP(?,?,?,?,?,?,?,?,?,?,"
                         + "?,?,?,?,?,?,?,?,?,?,?,"
                         + "?,?,?,?,?,?,?,?,?,?,"
                         + "?,?,?,?,?,?,?,?,?,?,"
                         + "?,?,?,?,?,?,?,?,?,?,"
                         + "?,?,?,?,?,?,?,?,?,?,"
-                        + "?,?,?,?,?,?,?)}");
+                        + "?,?,?,?)}");
                 //personales
                 cs.setString("paCurp", aspirante.getCurp());
                 cs.setString("paNombre", aspirante.getNombre());
@@ -512,7 +482,6 @@ public class InsertandoDatos extends HttpServlet {
                 cs.setString("paEdoCivil", aspirante.getEdoCivil());
                 cs.setString("paTipoSangre", aspirante.getTipoSangre());
                 cs.setString("paCapDiferente", aspirante.getCapacidadDif());
-                cs.setString("paCursoProp", String.valueOf(aspirante.getCurso().charAt(0)));
                 cs.setString("paCorreo", aspirante.getCorreo());
 
                 //domicilio
@@ -537,8 +506,6 @@ public class InsertandoDatos extends HttpServlet {
 
                 // Carrera
                 cs.setInt("paCarreraOp1", aspirante.getCarrOp1());
-                cs.setInt("paCarreraOp2", aspirante.getCarrOp2());
-                cs.setInt("paCarreraOp3", aspirante.getCarrOp3());
                 //Escuela de procedencia
                 cs.setString("paEscuela", AspEscuela.getEscuela());
                 cs.setString("paClaveEscuela", AspEscuela.getClaveEsc());
@@ -584,7 +551,6 @@ public class InsertandoDatos extends HttpServlet {
                 cs.setString("paTel_Cel", contacto.getTelCelular());
                 cs.setString("paCentroTrabajo", contacto.getCentroTrab());
                 cs.setString("paTel_Centro_Trab", contacto.getTelTrab());
-                cs.setString("paTel_Centro_Trab", contacto.getTelTrab());
 
                 cs.registerOutParameter("paCodigoError", OracleTypes.NUMBER);
                 cs.registerOutParameter("paMjeDescError", OracleTypes.VARCHAR);
@@ -618,7 +584,6 @@ public class InsertandoDatos extends HttpServlet {
                         + aspirante.getEdoCivil() + " "
                         + aspirante.getTipoSangre() + " "
                         + aspirante.getCapacidadDif() + " "
-                        + aspirante.getCurso().charAt(0) + " "
                         + aspirante.getCorreo() + " "
                         //domicilio
                         + "Domicilio: "
@@ -635,8 +600,6 @@ public class InsertandoDatos extends HttpServlet {
                         //carrera
                         + "Carrera:  1.-"
                         + aspirante.getCarrOp1() + " "
-                        + "2.-" + aspirante.getCarrOp2() + " "
-                        + "3.-" + aspirante.getCarrOp3() + " "
                         //Escuela de procedecia
                         + "Escuela de procedencia: "
                         + AspEscuela.getEscuela() + " "

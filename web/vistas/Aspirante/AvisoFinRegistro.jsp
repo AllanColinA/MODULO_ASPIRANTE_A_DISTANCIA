@@ -27,10 +27,10 @@
                         <label id="RetornoEnvioFinReg" style="text-align: justify"></label>
                     </div>
                     <div class="modal-footer">
-                        <a href="/MODULO_ASPIRANTE/Index.jsp">
+                        <a href="/MODULO_ASPIRANTE_A_DISTANCIA/Index.jsp">
                             <input  id="btnFinRegAceptar" type="button" class="btn btn-default btn-info" style="background-color: #337ab7" value="Aceptar">
                         </a>
-                        <input  id="btnFinRegCancel" type="button" class="btn btn-default btn-info"style="background-color: #337ab7" value="Aceptar" >
+                        <input  id="btnFinRegCancel" type="button" class="btn btn-default btn-info"style="background-color: #337ab7" value="Cancelar" >
                                 <!--style="display: block">-->
                     </div>
                 </div>

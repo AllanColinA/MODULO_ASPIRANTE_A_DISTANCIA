@@ -8,7 +8,6 @@ package servlets;
 import ConexionBD.Procedimientos;
 import ConexionBD.VerificaVigencia;
 import beans.BMail;
-import beans.FechaRenovar;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URL;
@@ -35,7 +34,6 @@ import utils.Constantes;
 public class EnviaEmailInicio extends HttpServlet {
 
     Encripta e = new Encripta();
-    ArrayList<FechaRenovar> fechaList;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -66,6 +64,7 @@ public class EnviaEmailInicio extends HttpServlet {
             String msg = cadExiste[1].trim();
             //System.out.println("*******************************************************-----------------------");
             //System.out.println("Resultado de Validacion de correo: " + correo + "  Existe ? :" + existe);
+            existe=0;
             switch (existe) {
 
                 case 0:
@@ -78,7 +77,7 @@ public class EnviaEmailInicio extends HttpServlet {
                             + "<br><br>"
                             + "<b><ins>Importante:</ins><b> Para realizar cualquier cambio en los datos proporcionados deberá solicitarlo en ventanilla del"
                             + " Departamento de Coordinación de Educación a Distancia. \n"
-                            + "Tome en cuenta que es responsabilidad del aspirante cumplir con todas etapas del proceso\n"
+                            + "Tome en cuenta que es responsabilidad del aspirante cumplir con todas las etapas del proceso\n"
                             + "para finalizar su registro de lo contrario su solicitud será rechazada."
                             + "<br><br>"
                             + "<br><br>"
@@ -141,7 +140,7 @@ public class EnviaEmailInicio extends HttpServlet {
                             + "<br><br>"
                             + "<b><ins>Importante:</ins><b> Para realizar cualquier cambio en los datos proporcionados deberá solicitarlo en ventanilla del"
                             + " Departamento de Coordinación de Educación a Distancia. \n"
-                            + "Tome en cuenta que es responsabilidad del aspirante cumplir con todas etapas del proceso\n"
+                            + "Tome en cuenta que es responsabilidad del aspirante cumplir con todas las etapas del proceso\n"
                             + "para finalizar su registro de lo contrario su solicitud será rechazada."
                             + "<br><br>"
                             + "<br><br>"

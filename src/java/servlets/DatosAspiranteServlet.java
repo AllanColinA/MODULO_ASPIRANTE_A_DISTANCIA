@@ -44,8 +44,6 @@ public class DatosAspiranteServlet extends HttpServlet {
     List<BaseDatos> opciones;
     BaseDatos catalogo = new BaseDatos();
     List<BaseDatos> opciones1;
-    List<BaseDatos> opciones2;
-    List<BaseDatos> opciones3;
     Encripta en = new Encripta();
 
     @Override
@@ -61,7 +59,7 @@ public class DatosAspiranteServlet extends HttpServlet {
             estado = catalogo.AgregaS(estado);
             Escuela = p.getCatalogos(8, 0);
             Escuela = catalogo.AgregaS(Escuela);
-            opciones = p.getCatalogos(10, 0);
+            opciones = p.getCatalogos(19, 0);
             opciones = catalogo.AgregaS(opciones);
             sangre = p.getCatalogos(11, 0);
             sangre = catalogo.AgregaS(sangre);
@@ -76,8 +74,6 @@ public class DatosAspiranteServlet extends HttpServlet {
             Logger.getLogger(DatosAspiranteServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         opciones1 = opciones;
-        opciones2 = opciones;
-        opciones3 = opciones;
         HttpSession session = request.getSession(true);
         session.setAttribute("mes", mes);
         session.setAttribute("dia", dia);
@@ -87,8 +83,6 @@ public class DatosAspiranteServlet extends HttpServlet {
         session.setAttribute("EdoCivil", EdoCivil);
         session.setAttribute("Discapacidad", Discapacidad);
         session.setAttribute("opciones1", opciones1);
-        session.setAttribute("opciones2", opciones2);
-        session.setAttribute("opciones3", opciones3);
         session.setAttribute("promedio", promedio);
         session.setAttribute("Escuela", Escuela);
         session.setAttribute("estado", estado);

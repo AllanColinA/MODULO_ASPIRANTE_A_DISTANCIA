@@ -54,7 +54,7 @@
                 <nav class="navbar navbar-default" role="navigation">
                     <div class="container-fluid">
                         <div class="navbar-header">
-                            <a class="navbar-brand" href="#" style="text-decoration:none">Módulo del Registro de Aspirantes.</a>
+                            <a class="navbar-brand" href="#" style="text-decoration:none">Módulo del Registro de Educaci&oacute;n a Distancia.</a>
                         </div>
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">            
                             <ul class="nav navbar-nav navbar-right">        
@@ -62,14 +62,6 @@
                                     <a  id="iniciobtn" class="glyphicon glyphicon-home" style="text-decoration:none;cursor: pointer; ">
                                     </a> 
                                 </li>
-                                <li class="dropdown">
-                                    <a id="recPreficha" class="dropdown-toggle" data-toggle="dropdown" 
-                                       role="button" aria-expanded="false" 
-                                       style="text-decoration:none;cursor: pointer;font-size:15px" 
-                                       rel="shadowbox;" href="${pageContext.request.contextPath}/manualgenerar" 
-                                       target="_blank"  >
-                                        Pasos del proceso para el registro del aspirante.</a>
-                                </li> 
                             </ul>
                         </div>
                     </div>
@@ -346,36 +338,6 @@
                                     </p>
                                 </fieldset>
                             </section>
-                            <section id="carrera_opcion2">    
-                                <fieldset>
-                                    <p><label name="Opcion2carrera" class="labels_carrera">Opción 2:</label>                                        
-                                        <select id="carreraopcion2" name="InputOpcion2" class="Selects_carrera" disabled>
-                                            <c:forEach items="${opciones2}" var="opciones2">                                     
-                                                <option value="${opciones2.getClave()}"><c:out value="${opciones2.getNombre()}"/></option>                                                                           
-                                            </c:forEach>
-                                        </select></p>
-                                </fieldset>
-                            </section>
-                            <section id="carrera_opcion3">    
-                                <fieldset>
-                                    <p><label name="Opcion3carrera" class="labels_carrera">Opción 3:</label>                                        
-                                        <select  name="InputOpcion3" class="Selects_carrera" id="carreraopcion3"  disabled >
-                                            <c:forEach items="${opciones3}" var="opciones3">                                     
-                                                <option value="${opciones3.getClave()}"><c:out value="${opciones3.getNombre()}"/></option>                                                                           
-                                            </c:forEach>
-                                        </select></p>
-                                </fieldset>
-                            </section>
-                            <section id="carrera_curso">
-                                <fieldset> 
-                                    <p><label name="cursopropedeutico" id="cursopropedeutico_label" class="labels_carrera">Tomaste Curso <br> Propedéutico en  la Institución:</label>
-                                        <select name="curso_sino" id="propedeuticoSelect" id="curso_sino"  >
-                                            <option value="--">--</option>
-                                            <option value="S">Si</option>
-                                            <option value="N">No</option>
-                                        </select></p>
-                                </fieldset>
-                            </section>               
                         </div>
                     </div>
                     <div>

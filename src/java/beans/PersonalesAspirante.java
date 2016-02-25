@@ -27,10 +27,7 @@ public class PersonalesAspirante {
     private String EdoCivil;
     private String TipoSangre;
     private String CapacidadDif;
-    private String curso;
     private int CarrOp1;
-    private int CarrOp2;
-    private int CarrOp3;
     
     
  
@@ -206,19 +203,6 @@ public class PersonalesAspirante {
         this.CapacidadDif = CapacidadDif;
     }
 
-    /**
-     * @return the curso
-     */
-    public String getCurso() {
-        return curso;
-    }
-
-    /**
-     * @param curso the curso to set
-     */
-    public void setCurso(String curso) {
-        this.curso = curso;
-    }
 
     /**
      * @return the IdAspirante
@@ -246,33 +230,5 @@ public class PersonalesAspirante {
      */
     public void setCarrOp1(int CarrOp1) {
         this.CarrOp1 = CarrOp1;
-    }
-
-    /**
-     * @return the CarrOp2
-     */
-    public int getCarrOp2() {
-        return CarrOp2;
-    }
-
-    /**
-     * @param CarrOp2 the CarrOp2 to set
-     */
-    public void setCarrOp2(int CarrOp2) {
-        this.CarrOp2 = CarrOp2;
-    }
-
-    /**
-     * @return the CarrOp3
-     */
-    public int getCarrOp3() {
-        return CarrOp3;
-    }
-
-    /**
-     * @param CarrOp3 the CarrOp3 to set
-     */
-    public void setCarrOp3(int CarrOp3) {
-        this.CarrOp3 = CarrOp3;
     }
 }

@@ -3,7 +3,6 @@
  */
 package ConexionBD;
 
-import beans.FechaRenovar;
 import java.sql.CallableStatement;
 import java.sql.SQLException;
 import java.text.ParseException;

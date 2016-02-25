@@ -46,8 +46,6 @@ public class DatosPersonalesAsp extends HttpServlet {
         switch (opc) {
             case "1":
                 String op1 = request.getParameter("op1carre");
-                String op2 = request.getParameter("op2carre");
-                String op3 = request.getParameter("op3carre");
 //                System.out.println("Entra  servlet");
                 boolean continua = false;
 
@@ -85,9 +83,6 @@ public class DatosPersonalesAsp extends HttpServlet {
                 }
                 if (tel1 == 0 || tel2 == 0) {
                     //out.print("5");
-                    ret = "5";
-                } else if (op1.equals(op2) || op1.equals(op3) || op3.equals(op2)) {
-                    //out.print("6");
                     ret = "6";
                 } else if (perEsc.equals("false")) {
                     //periodo escolar invalido
@@ -227,9 +222,6 @@ public class DatosPersonalesAsp extends HttpServlet {
         AspEscuela.setAnioFin(listaAsp.get(33).trim());
         AspEscuela.setPromedio(listaAsp.get(34).trim());
         aspirante.setCarrOp1(Integer.parseInt(listaAsp.get(35).trim()));
-        aspirante.setCarrOp2(Integer.parseInt(listaAsp.get(36).trim()));
-        aspirante.setCarrOp3(Integer.parseInt(listaAsp.get(37).trim()));
-        aspirante.setCurso(listaAsp.get(38).trim());
 
     }
 

@@ -50,10 +50,7 @@ function ConfirmaDatos() {
     nombre = IniCap(nombre);
     paterno = IniCap(paterno);
     materno = IniCap(materno);
-//    $('#confirmanombre').text(paterno + " " + materno + " " + nombre);
-//    $('#confirmacurp').text(curp);
-//    $('#confirmacorreo').text(correo);
-//    $('#confirmacarrera ').text(carrera);
+    
     $('#confirmanombreAsp').text(paterno + " " + materno + " " + nombre);
     $('#confirmacurpAsp').text(curp);
     $('#confirmacorreoAsp').text(correo);
@@ -131,48 +128,7 @@ function Filtros(id, data) {
         $(id).append("<option value='" + txt + "'>" + t + "</option>");
     });
 }
-////Función que valida que las opciones de   Carreras  que selccione el aspirante  no se repitan 
-function Limpiar(id, c1, c2, c3) {
-    $("#carreraopcion option").each(function () {
-        $(id).children('option[value=' + $(this).attr('value') + ']').css("display", "block");
-    });
-    if (c1 !== '--') {
-        $('#carreraopcion2').children('option[value=' + c1 + ']').css("display", "none");
-        $('#carreraopcion3').children('option[value=' + c1 + ']').css("display", "none");
-    }
-    if (c2 !== '--') {
-        $('#carreraopcion1').children('option[value=' + c2 + ']').css("display", "none");
-        $('#carreraopcion3').children('option[value=' + c2 + ']').css("display", "none");
-    }
-    if (c3 !== '--') {
-        $('#carreraopcion1').children('option[value=' + c3 + ']').css("display", "none");
-        $('#carreraopcion2').children('option[value=' + c3 + ']').css("display", "none");
-    }
-}
-//Función que muestra las opciones de carrera
-function Carreras(id, opcion) {
-    var carrera1 = $('#carreraopcion1').val();
-    var carrera2 = $('#carreraopcion2').val();
-    var carrera3 = $('#carreraopcion3').val();
-    if (opcion === 1 && carrera1 !== '--') {
-        Limpiar("#carreraopcion2", carrera1, carrera2, carrera3);
-        Limpiar("#carreraopcion3", carrera1, carrera2, carrera3);
-        $("#carreraopcion2").children('option[value=' + carrera1 + ']').css("display", "none");
-        $("#carreraopcion3").children('option[value=' + carrera1 + ']').css("display", "none");
-    }
-    if (opcion === 2 && carrera2 !== '--') {
-        Limpiar("#carreraopcion1", carrera1, carrera2, carrera3);
-        Limpiar("#carreraopcion3", carrera1, carrera2, carrera3);
-        $('#carreraopcion1').children('option[value=' + carrera2 + ']').css("display", "none");
-        $('#carreraopcion3').children('option[value=' + carrera2 + ']').css("display", "none");
-    }
-    if (opcion === 3 && carrera3 !== '--') {
-        Limpiar("#carreraopcion1", carrera1, carrera2, carrera3);
-        Limpiar("#carreraopcion2", carrera1, carrera2, carrera3);
-        $('#carreraopcion1').children('option[value=' + carrera3 + ']').css("display", "none");
-        $('#carreraopcion2').children('option[value=' + carrera3 + ']').css("display", "none");
-    }
-}
+
 //Función que valida cada rango de los días que tienen los meses del año
 function evaluar() {
 //obtener  fecha 
@@ -455,7 +411,7 @@ function Pais(id) {
         var pais = $(id).val();
         if (pais === 'MEX') {
             var opcion = 4;
-            $.getJSON("/MODULO_ASPIRANTE/CargaCatalogoServlet",
+            $.getJSON("/MODULO_ASPIRANTE_A_DISTANCIA/CargaCatalogoServlet",
                     {opcion: opcion},
             function (data) {
                 //limpiar el option value
@@ -694,14 +650,11 @@ function escprocedencia() {
 function carreradeseada() {
     var DatCarrera;
     var carrera1 = ObtenerValor('#carreraopcion1');
-    var carrera2 = ObtenerValor('#carreraopcion2');
-    var carrera3 = ObtenerValor('#carreraopcion3');
-    var curso = ObtenerValor('#propedeuticoSelect');
-    if (carrera1 !== false && carrera2 !== false && carrera3 !== false && curso !== false) {
-        DatCarrera = carrera1 + "||" + carrera2 + "||" + carrera3 + "||" + curso;
+    if (carrera1 !== false ) {
+        DatCarrera = carrera1;
         return DatCarrera;
     } else {
-        alert("Complete las opciones de carrera");
+        alert("Seleccione una Carrera");
         return false;
     }
 }
@@ -851,7 +804,7 @@ function nonulos_socioeconomicos() {
 }
 
 
-//************Mostrar_Manual.jsp 
+//************Mostrar_Manual.jsp ¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿
 function MostrarManual() {
     $(function () {
         var picture = $('#manual_aspirante');
@@ -1043,11 +996,6 @@ $(document).ready(function () {
         hideBtnInicio();
         $('#divAvisoPago').modal('hide');
     });
-    $('#btnXPagoExa').off().on('click', function () {
-        hideBtnInicio();
-        $('#divAvisoPago').modal('hide');
-    });
-
     $('#btnCancelarNoFichas').off().on('click', function () {
         hideBtnInicio();
         $('#divMarcoNoFichas').modal('hide');
@@ -1110,7 +1058,7 @@ $(document).ready(function () {
     $('#iniciobtn').off().on('click', function () {
         var home = confirm("Los  datos no  han sido guardados  y se  perderán. ¿Desea salir de la página? ");
         if (home == true) {
-            location.href = "/MODULO_ASPIRANTE/Index.jsp";
+            location.href = "/MODULO_ASPIRANTE_A_DISTANCIA/Index.jsp";
         } else {
 
         }
@@ -1125,7 +1073,7 @@ $(document).ready(function () {
     $('#selectedonacimiento').change(function () {
         var pk = $('#selectedonacimiento option:selected').val();
         var opcion = 1;
-        $.getJSON("/MODULO_ASPIRANTE/CargaCatalogoServlet",
+        $.getJSON("/MODULO_ASPIRANTE_A_DISTANCIA/CargaCatalogoServlet",
                 {pk: pk, opcion: opcion},
         function (data) {
             //limpiar el option value
@@ -1135,7 +1083,7 @@ $(document).ready(function () {
     $('#input_estado').change(function () {
         var pk = $('#input_estado option:selected').val();
         var opcion = 1;
-        $.getJSON("/MODULO_ASPIRANTE/CargaCatalogoServlet",
+        $.getJSON("/MODULO_ASPIRANTE_A_DISTANCIA/CargaCatalogoServlet",
                 {pk: pk, opcion: opcion},
         function (data) {
             //limpiar el option value
@@ -1148,7 +1096,7 @@ $(document).ready(function () {
     $('#estado').change(function () {
         var pk = $('#estado option:selected').val();
         var opcion = 1;
-        $.getJSON("/MODULO_ASPIRANTE/CargaCatalogoServlet",
+        $.getJSON("/MODULO_ASPIRANTE_A_DISTANCIA/CargaCatalogoServlet",
                 {pk: pk, opcion: opcion},
         function (data) {
             //limpiar el option value
@@ -1159,7 +1107,7 @@ $(document).ready(function () {
         var pk = $('#combompnacimiento option:selected').val();
         $('#combocdnacimiento').prop("disabled", false);
         var opcion = 2;
-        $.getJSON("/MODULO_ASPIRANTE/CargaCatalogoServlet",
+        $.getJSON("/MODULO_ASPIRANTE_A_DISTANCIA/CargaCatalogoServlet",
                 {pk: pk, opcion: opcion},
         function (data) {
             //limpiar el option value
@@ -1169,7 +1117,7 @@ $(document).ready(function () {
     $('#dirmunicipio').change(function () {
         var pk = $('#dirmunicipio option:selected').val();
         var opcion = 2;
-        $.getJSON("/MODULO_ASPIRANTE/CargaCatalogoServlet",
+        $.getJSON("/MODULO_ASPIRANTE_A_DISTANCIA/CargaCatalogoServlet",
                 {pk: pk, opcion: opcion},
         function (data) {
             //limpiar el option value
@@ -1187,7 +1135,7 @@ $(document).ready(function () {
         $("#tablaCCT").find("tr:gt(0)").remove();
         var estado = $('#inputestado option:selected').val();
         $("#buscar_clave").prop("disabled", true);
-        $.get('/MODULO_ASPIRANTE/Servlet_ClaveCCT',
+        $.get('/MODULO_ASPIRANTE_A_DISTANCIA/Servlet_ClaveCCT',
                 {estado: estado},
         function (retorno) {
             var $ul = $('<tbody id="ListaClave"></tbody>').appendTo($('#tablaCCT'));
@@ -1296,17 +1244,6 @@ $(document).ready(function () {
             $('#otroviveinput').hide();
         }
     });
-    $('#carreraopcion1').change(function () {
-        $('#carreraopcion2').prop("disabled", false);
-        Carreras('#carreraopcio1', 1);
-    });
-    $('#carreraopcion2').change(function () {
-        $('#carreraopcion3').prop("disabled", false);
-        Carreras('#carreraopcion2', 2);
-    });
-    $('#carreraopcion3').change(function () {
-        Carreras('#carreraopcion3', 3);
-    });
     $('#anio_fin').change(function () {
         //ValidaPeriodoEscPro();
         //valDate();
@@ -1319,11 +1256,7 @@ $(document).ready(function () {
 //Botón Continuar 
     $('#continuar_datos').off().on('click', function () {
         var op1carre = $('#carreraopcion1').val();
-        var op2carre = $('#carreraopcion2').val();
-        var op3carre = $('#carreraopcion3').val();
-//        alert("Op1:  "+op1carre);
-//        alert("Op2:  "+op2carre);
-//        alert("Op3:  "+op3carre);
+        
         var opcion = 1;
         //var periodoEsc = ValidaPeriodoEscPro();
         var periodoEsc = valDate();
@@ -1346,13 +1279,14 @@ $(document).ready(function () {
 
                     } else {
 
-                        $.get('/MODULO_ASPIRANTE/DatosPersonalesAsp',
+                        $.get('/MODULO_ASPIRANTE_A_DISTANCIA/DatosPersonalesAsp',
                                 {TodNulos: TodNulos, opcion: opcion, telefonofijo: telefonofijo, telefonopersonal: telefonopersonal
-                                    , op1carre: op1carre, op2carre: op2carre, op3carre: op3carre, zipCode: codPostal, periodoEsc: periodoEsc},
+                                    , op1carre: op1carre,zipCode: codPostal, periodoEsc: periodoEsc},
                         function (data) {
-                            //alert("info del servlet: data = " + data);
+                            alert("info del servlet: data = " + data);
                             if (data == 0) {
                                 ConfirmaDatos();
+                                alert("entró a la condición: data = " + data);
                                 //alert("Termina confirmaDatos con data=" + data +"\n intentando modal de confirmacion");
                                 //$('#div_fondomarco').show();
                                 //$('#divmarco').show();
@@ -1409,20 +1343,20 @@ $(document).ready(function () {
 
     $('#confirmar').off().on('click', function () {
         var opcion = 3;
-        $.get('/MODULO_ASPIRANTE/CargaCatalogoServlet',
+        $.get('/MODULO_ASPIRANTE_A_DISTANCIA/CargaCatalogoServlet',
                 {opcion: opcion},
         function () {
             $('#divmarco').hide();
             $('#div_fondomarco').hide();
-            $("#contenido").load("/MODULO_ASPIRANTE/vistas/Aspirante/Datos_Socioeconomicos.jsp");
+            $("#contenido").load("/MODULO_ASPIRANTE_A_DISTANCIA/vistas/Aspirante/Datos_Socioeconomicos.jsp");
         });
     });
     $('#btnConfirmaAspData').off().on('click', function () {
         var opcion = 3;
-        $.get('/MODULO_ASPIRANTE/CargaCatalogoServlet',
+        $.get('/MODULO_ASPIRANTE_A_DISTANCIA/CargaCatalogoServlet',
                 {opcion: opcion},
         function () {
-            $("#contenido").load("/MODULO_ASPIRANTE/vistas/Aspirante/Datos_Socioeconomicos.jsp");
+            $("#contenido").load("/MODULO_ASPIRANTE_A_DISTANCIA/vistas/Aspirante/Datos_Socioeconomicos.jsp");
             $('#divMarcoContinuaSocioecon').modal('hide');
         });
     });
@@ -1443,7 +1377,7 @@ $(document).ready(function () {
         var DatosSoc = nonulos_socioeconomicos();
         if (DatosSoc === false || DatosSoc === '') {
         } else {
-            $.get('/MODULO_ASPIRANTE/InsertandoDatos',
+            $.get('/MODULO_ASPIRANTE_A_DISTANCIA/InsertandoDatos',
                     {DatosSoc: DatosSoc},
             function (RespuestaDatosAsp) {
                 var res;
@@ -1532,7 +1466,7 @@ $(document).ready(function () {
     $('#btnFinRegAceptar').off().on('click', function () {
         //llama  servlet  que  limpia  variables  
         var opcion = 2;
-        $.get('/MODULO_ASPIRANTE/DatosPersonalesAsp',
+        $.get('/MODULO_ASPIRANTE_A_DISTANCIA/DatosPersonalesAsp',
                 {opcion: opcion},
         function (data) {
             $('#divMarcoFinReg').modal('hide');
@@ -1582,7 +1516,7 @@ $(document).ready(function () {
     $('#subirdespues , #confirmarcarga').click(function () {
         $('#div_marco').hide();
         $('#div_fondomarco').hide();
-        $("#contenido").load("/MODULO_ASPIRANTES/vistas/Aspirante/Datos_Socioeconomicos.jsp");
+        $("#contenido").load("/MODULO_ASPIRANTE_A_DISTANCIA/vistas/Aspirante/Datos_Socioeconomicos.jsp");
     });
 });
 /////////////////////////////////////////////////////////////////////////////////////// fin cargar  la  página /////////////////////////////////////////////////////

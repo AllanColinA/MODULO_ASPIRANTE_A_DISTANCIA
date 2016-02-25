@@ -3,7 +3,6 @@ package ConexionBD;
 
 import beans.BaseDatos;
 import beans.ClaveCCT;
-import beans.FechaRenovar;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -180,8 +179,8 @@ public class Procedimientos {
     //
 
     public int[] InsertaPersonales(String curp, String nombre, String Apaterno, String Amaterno, String FecNac,
-            String Pais, String Estado, String Municipio, String Localidad, char sexo, String EdoCivil, String sangre, String capacidad,
-            char Curso, String correo) {
+            String Pais, String Estado, String Municipio, String Localidad, char sexo, String EdoCivil, String sangre, String capacidad
+            , String correo) {
         int IdAspiranteRes[] = new int[2];
         try {
             cs = con.getConnection().prepareCall("{call FICHAS.PQ_INSERT_ASPIRANTE_1.SET_REGISTRO_PERSONALDATA_SP(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
@@ -204,7 +203,6 @@ public class Procedimientos {
             cs.setString("paEdoCivil", EdoCivil);
             cs.setString("paTipoSangre", sangre);
             cs.setString("paCapDiferente", capacidad);
-            cs.setString("paCursoProp", String.valueOf(Curso));
             cs.setString("paCorreo", correo);
             cs.registerOutParameter("paIdAspirante", OracleTypes.NUMBER);
             cs.registerOutParameter("paCodigoError", OracleTypes.NUMBER);

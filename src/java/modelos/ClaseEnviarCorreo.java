@@ -74,7 +74,6 @@ public class ClaseEnviarCorreo {
                 + "        <img src=\"cid:cidcabecera\" />\n"
                 + "        <pre style=\"font-family:'calibri'; font-size: 16px;\">\n"
                 + "            Instituto Tecnológico de Toluca\n"
-                + "\n"
                 + "        </pre>\n"
                 + "    </header>\n"
                 + "    <body >";
@@ -172,7 +171,6 @@ public class ClaseEnviarCorreo {
                 + "        <img src=\"cid:cidcabecera\" />\n"
                 + "        <pre style=\"font-family:'calibri'; font-size: 16px;\">\n"
                 + "            Instituto Tecnológico de Toluca\n"
-                + "\n"
                 + "        </pre>\n"
                 + "    </header>\n"
                 + "    <body >";
@@ -263,7 +261,6 @@ public class ClaseEnviarCorreo {
                 + "        <img src=\"cid:cidcabecera\" />\n"
                 + "        <pre style=\"font-family:'calibri'; font-size: 16px;\">\n"
                 + "            Instituto Tecnológico de Toluca\n"
-                + "\n"
                 + "        </pre>\n"
                 + "    </header>\n"
                 + "    <body >";
